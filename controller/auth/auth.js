@@ -242,7 +242,7 @@ module.exports = {
           html:
             `<p>hello ${req.body.email}</p>` +
             '<br><p>Someone has requested a link to change your password. You can do this through the link below.</p>'+
-            `<a href='http://localhost:4200/resetpass/${user._id}'>Change my password</a>`+
+            `<a href='https://devdom.irfanali.club/resetpass/${user._id}'>Change my password</a>`+
             "<br><p>If you didn't request this, please ignore this email <br>Your password won't change until you access the link above and create a new one.</p>",// html body
         };
         transporter.sendMail(mailOptions, (error, info) => {

@@ -11,6 +11,8 @@ module.exports={
     gettagdetails:(req,res,next)=>{
         try {
             tagModel.find().limit(3).then((data)=>{
+                console.log(data,"tagdetails");
+
                 res.json(data).status(200)
             })
         } catch (error) {
