@@ -147,22 +147,24 @@ module.exports = {
     try {
       let apiRes = {};
       const client = new OAuth2Client(process.env.CLIENT_ID);
-
+      console.log(client);
+      console.log(req.params.id,"ID");
       const ticket = await client.verifyIdToken({
         idToken: req.params.id,
         audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });
+      console.log(ticket);
       const payload = ticket.getPayload();
+      console.log(payload);
       const userid = payload["sub"];
       const userdetails = {
         email: payload.email,
         name: payload.name,
         picture: payload.picture,
-        // If request specified a G Suite domain:
-        // const domain = payload['hd'];
       };
+      console.log(userdetails);
       let user = await userModel.findOne({ email: userdetails.email });
       if (user) {
         let token = jwt.sign({
