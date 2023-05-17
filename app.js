@@ -25,15 +25,15 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
   // next(createError(500))
 })
 
-const corsOptions = {
-  origin: 'devdom.irfanali.club/',
+const corsoptions = {
+  origin: 'https://devdom.irfanali.club/',
   methods: 'GET, POST, PUT ,DELETE,PATCH',
   allowedHeaders: 'Content-Type, Authorization',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 // view engine setup
-app.use(cors(corsOptions))
+app.use(cors(corsoptions))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -48,21 +48,21 @@ app.use('/users', usersRouter);
 
 function initSocketIo(server){
   const io_commentChats = socketio(server,{
-    cors:corsOptions,
+    cors:corsoptions,
     path: '/singlepost'
   });
   const ios = io_commentChats
   commentSocket.chatMessages(ios)
 
   const io_commentReplay = socketio(server,{
-    cors:corsOptions,
+    cors:corsoptions,
     path: '/replaycomment'
   });
   const replay = io_commentReplay
   replaySocekt.chatMessages(replay)
 
   const io_chat = socketio(server,{
-    cors:corsOptions,
+    cors:corsoptions,
     path: '/chat'
   });
   const chat  = io_chat
