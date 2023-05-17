@@ -149,9 +149,10 @@ module.exports = {
       const client = new OAuth2Client(process.env.CLIENT_ID);
       console.log(client);
       console.log(req.params.id,"ID");
+      console.log(process.env.CLIENT_ID,"CLIENT ID _______________-");
       const ticket = await client.verifyIdToken({
-        idToken: req.params.id,
-        audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
+        idToken:req.params.id,
+        audience:process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });
