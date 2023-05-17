@@ -177,6 +177,7 @@ module.exports = {
         res.json(apiRes);
       }
     } catch (error) {
+      console.log(error)
       next(error);
     }
   },
