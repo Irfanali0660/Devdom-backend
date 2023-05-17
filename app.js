@@ -25,11 +25,13 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
   // next(createError(500))
 })
 
+//cors configuration
+
 const corsoptions = {
-  origin: 'https://devdom.irfanali.club/',
+  origin: 'https://devdom.irfanali.club',
   methods: 'GET, POST, PUT ,DELETE,PATCH',
   allowedHeaders: 'Content-Type, Authorization',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200
 };
 
 // view engine setup
