@@ -155,16 +155,16 @@ module.exports = {
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });
-      console.log(ticket);
+      console.log(ticket,"TIKET _______________________");
       const payload = ticket.getPayload();
-      console.log(payload);
+      console.log(payload,"payload____________________");
       const userid = payload["sub"];
       const userdetails = {
         email: payload.email,
         name: payload.name,
         picture: payload.picture,
       };
-      console.log(userdetails);
+      console.log(userdetails,'________________________');
       let user = await userModel.findOne({ email: userdetails.email });
       if (user) {
         let token = jwt.sign({
