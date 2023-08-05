@@ -5,7 +5,18 @@ module.exports={
     // get user
     getusers:(req,res,next)=>{
         try {
-            userModel.find({_id:{$not:{$eq:res.locals.jwtUSER._id}}}).then((user)=>{
+            userModel.aggregate([
+                {
+                  $match: {
+                    _id: { $ne: res.locals.jwtUSER._id }
+                  },
+                },{
+                    $project:{
+                        _id:1,userName:1,googleimage:1,image:1
+                    }
+                }
+              ])
+              .then((user)=>{
                 res.json(user)
             })
         } catch (error) {

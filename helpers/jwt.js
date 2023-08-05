@@ -40,7 +40,6 @@ module.exports = {
             apiRes.authorization = true;
             return next();
           } catch (err) {
-            console.log(err);
             return socket.emit('error',apiRes.message) 
           }
         }

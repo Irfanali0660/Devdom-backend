@@ -9,10 +9,20 @@ module.exports={
 
   // add new post
 
-    addpost:async(req,res,next)=>{
+    addpost:(req,res,next)=>{
       try { 
-          let tagArray = req.body.tag.split(',');
-          const filenames = req.files.map((file) => file.filename);
+        let apiRes={}
+        res.locals.upload(req, res, async function (err) {
+          if (err) {
+            apiRes.message = 'Error: Invalid type of file!'
+           return res.json(apiRes);
+          } else {
+            if (req.file == undefined) {
+              apiRes.message = 'Error: No Heading File Selected!'
+             return res.json(apiRes);
+            } else {
+              let tagArray = req.body.tag.split(',');
+          // const filenames = req.files.map((file) => file.filename);
             for (let i = 0; i < tagArray.length; i++) {
               let data= await tagModel.findOne({title:tagArray[i]})
               tagArray[i]=data?.id
@@ -21,12 +31,16 @@ module.exports={
           let newpost=postModel({
             userId:res.locals.jwtUSER._id,
             post:req.body.editor,
-            image:filenames[0],
+            image:req.file.filename,
             tag:tagArray
           })
           newpost.save().then(()=>{
-            res.json("success").status(200)
+            apiRes.success = "success"
+            res.json(apiRes).status(200)
           })
+            }
+          }
+        });
         } catch (error) {
           next(error)
         }
@@ -56,7 +70,6 @@ module.exports={
           res.json(data)
         })
       } catch (error) {
-        console.log(error);
         next()
       }
     },

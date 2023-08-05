@@ -57,8 +57,6 @@ const userSchema =new mongoose.Schema({
         type:String
     }
 
-
-
 })
 
 module.exports = userModel = mongoose.model('userData',userSchema);

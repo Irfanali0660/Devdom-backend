@@ -16,7 +16,7 @@ module.exports={
                 let token = jwt.sign({
                     email:process.env.AD_EMAIL,
                 })
-                  apiRes.token = token;
+                apiRes.token = token;
                 apiRes.success="Success"
                 res.json(apiRes)
             }else{

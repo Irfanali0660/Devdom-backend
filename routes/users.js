@@ -9,6 +9,7 @@ const { updatebio,userlist,deletelist,editlist,updateList,getuserpost,deletepost
 const { getusers,chatroom ,chatmessage}=require('../controller/user/chatController')
 const jwt = require('../helpers/jwt');
 const multer=require('multer');
+const { multer_init }=require('../helpers/multer')
 const { verify } = require('jsonwebtoken');
 
 
@@ -32,10 +33,11 @@ const storage = multer.diskStorage({
     const filename = file.originalname.split(' ').join('-')
     const extension = FILE_TYPE_MAP[file.mimetype]
     cb(null, `${filename.split('.')[0]}-${Date.now()}.${extension}`)
-    console.log("HELLO");
   }
 })
 const uploadOptions = multer({ storage:storage})
+
+
 
 
 
@@ -44,7 +46,7 @@ const uploadOptions = multer({ storage:storage})
 router.post('/signup',signup);
 router.post('/login',login)
 router.get('/sociallogin/:id',sociallogin)
-router.post('/addpost',uploadOptions.array('image'),jwt.verify,addpost)
+router.post('/addpost',multer_init({route:'images',filename:'image'}),jwt.verify,addpost)
 router.post('/forgotpass',forgotpass)
 router.post('/comments',comments)
 router.post('/addnewlist',jwt.verify,addnewlist)

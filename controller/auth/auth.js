@@ -147,25 +147,19 @@ module.exports = {
     try {
       let apiRes = {};
       const client = new OAuth2Client(process.env.CLIENT_ID);
-      console.log(client);
-      console.log(req.params.id,"ID");
-      console.log(process.env.CLIENT_ID,"CLIENT ID _______________-");
       const ticket = await client.verifyIdToken({
         idToken:req.params.id,
         audience:process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });
-      console.log(ticket,"TIKET _______________________");
       const payload = ticket.getPayload();
-      console.log(payload,"payload____________________");
       const userid = payload["sub"];
       const userdetails = {
         email: payload.email,
         name: payload.name,
         picture: payload.picture,
       };
-      console.log(userdetails,'________________________');
       let user = await userModel.findOne({ email: userdetails.email });
       if (user) {
         let token = jwt.sign({
@@ -180,7 +174,6 @@ module.exports = {
         res.json(apiRes);
       }
     } catch (error) {
-      console.log(error)
       next(error);
     }
   },
@@ -260,7 +253,6 @@ module.exports = {
         res.json(apiRes)
       }
     } catch (error) {
-      console.log(error);
       next(error)
     }
   },
