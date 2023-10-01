@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
 //cors configuration
 
 const corsoptions = {
-  origin: 'https://devdomforum.irfanali.club/#/',
+  origin: 'https://devdomforum.irfanali.club',
   methods: 'GET, POST, PUT ,DELETE,PATCH',
   allowedHeaders: 'Content-Type, Authorization',
   optionsSuccessStatus: 200
