@@ -112,6 +112,7 @@ module.exports = {
   login: async (req, res, next) => {
     try {
       let apiRes = {};
+      console.log(req.body,"login body");
       let user = await userModel.findOne({ email: req.body.email });
       if (user) {
         if (user.status == true) {
